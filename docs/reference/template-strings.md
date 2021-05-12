@@ -251,6 +251,70 @@ Example:
 my-variable: ${local.usernameLowerCase}
 ```
 
+### `${workflow.*}`
+
+Context variables that are specific to the currently running Garden Cloud workflow. These values are only available for workflows triggered by Garden Cloud in response to VCS event (e.g. from GitHub or GitLab).
+
+| Type     |
+| -------- |
+| `object` |
+
+### `${workflow.runUid}`
+
+The globally unique UID of the workflow run.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runUid}
+```
+
+### `${workflow.runNumber}`
+
+The run number of this workflow. This is incremented across all workflows within a given project.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runNumber}
+```
+
+### `${workflow.repoName}`
+
+The name of the repo that was cloned to run this workflow
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.repoName}
+```
+
+### `${workflow.pullRequestNumber}`
+
+The number of the pull/merge request that triggered this workflow.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.pullRequestNumber}
+```
+
 ### `${command.*}`
 
 Information about the currently running command and its arguments.
@@ -448,6 +512,70 @@ Example:
 
 ```yaml
 my-variable: ${local.usernameLowerCase}
+```
+
+### `${workflow.*}`
+
+Context variables that are specific to the currently running Garden Cloud workflow. These values are only available for workflows triggered by Garden Cloud in response to VCS event (e.g. from GitHub or GitLab).
+
+| Type     |
+| -------- |
+| `object` |
+
+### `${workflow.runUid}`
+
+The globally unique UID of the workflow run.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runUid}
+```
+
+### `${workflow.runNumber}`
+
+The run number of this workflow. This is incremented across all workflows within a given project.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runNumber}
+```
+
+### `${workflow.repoName}`
+
+The name of the repo that was cloned to run this workflow
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.repoName}
+```
+
+### `${workflow.pullRequestNumber}`
+
+The number of the pull/merge request that triggered this workflow.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.pullRequestNumber}
 ```
 
 ### `${command.*}`
@@ -679,6 +807,70 @@ Example:
 
 ```yaml
 my-variable: ${local.usernameLowerCase}
+```
+
+### `${workflow.*}`
+
+Context variables that are specific to the currently running Garden Cloud workflow. These values are only available for workflows triggered by Garden Cloud in response to VCS event (e.g. from GitHub or GitLab).
+
+| Type     |
+| -------- |
+| `object` |
+
+### `${workflow.runUid}`
+
+The globally unique UID of the workflow run.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runUid}
+```
+
+### `${workflow.runNumber}`
+
+The run number of this workflow. This is incremented across all workflows within a given project.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runNumber}
+```
+
+### `${workflow.repoName}`
+
+The name of the repo that was cloned to run this workflow
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.repoName}
+```
+
+### `${workflow.pullRequestNumber}`
+
+The number of the pull/merge request that triggered this workflow.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.pullRequestNumber}
 ```
 
 ### `${command.*}`
@@ -1003,6 +1195,70 @@ Example:
 
 ```yaml
 my-variable: ${local.usernameLowerCase}
+```
+
+### `${workflow.*}`
+
+Context variables that are specific to the currently running Garden Cloud workflow. These values are only available for workflows triggered by Garden Cloud in response to VCS event (e.g. from GitHub or GitLab).
+
+| Type     |
+| -------- |
+| `object` |
+
+### `${workflow.runUid}`
+
+The globally unique UID of the workflow run.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runUid}
+```
+
+### `${workflow.runNumber}`
+
+The run number of this workflow. This is incremented across all workflows within a given project.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runNumber}
+```
+
+### `${workflow.repoName}`
+
+The name of the repo that was cloned to run this workflow
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.repoName}
+```
+
+### `${workflow.pullRequestNumber}`
+
+The number of the pull/merge request that triggered this workflow.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.pullRequestNumber}
 ```
 
 ### `${command.*}`
@@ -1577,6 +1833,70 @@ Example:
 my-variable: ${local.usernameLowerCase}
 ```
 
+### `${workflow.*}`
+
+Context variables that are specific to the currently running Garden Cloud workflow. These values are only available for workflows triggered by Garden Cloud in response to VCS event (e.g. from GitHub or GitLab).
+
+| Type     |
+| -------- |
+| `object` |
+
+### `${workflow.runUid}`
+
+The globally unique UID of the workflow run.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runUid}
+```
+
+### `${workflow.runNumber}`
+
+The run number of this workflow. This is incremented across all workflows within a given project.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runNumber}
+```
+
+### `${workflow.repoName}`
+
+The name of the repo that was cloned to run this workflow
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.repoName}
+```
+
+### `${workflow.pullRequestNumber}`
+
+The number of the pull/merge request that triggered this workflow.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.pullRequestNumber}
+```
+
 ### `${command.*}`
 
 Information about the currently running command and its arguments.
@@ -2054,6 +2374,70 @@ Example:
 
 ```yaml
 my-variable: ${local.usernameLowerCase}
+```
+
+### `${workflow.*}`
+
+Context variables that are specific to the currently running Garden Cloud workflow. These values are only available for workflows triggered by Garden Cloud in response to VCS event (e.g. from GitHub or GitLab).
+
+| Type     |
+| -------- |
+| `object` |
+
+### `${workflow.runUid}`
+
+The globally unique UID of the workflow run.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runUid}
+```
+
+### `${workflow.runNumber}`
+
+The run number of this workflow. This is incremented across all workflows within a given project.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.runNumber}
+```
+
+### `${workflow.repoName}`
+
+The name of the repo that was cloned to run this workflow
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.repoName}
+```
+
+### `${workflow.pullRequestNumber}`
+
+The number of the pull/merge request that triggered this workflow.
+
+| Type     |
+| -------- |
+| `number` |
+
+Example:
+
+```yaml
+my-variable: ${workflow.pullRequestNumber}
 ```
 
 ### `${command.*}`
