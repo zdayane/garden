@@ -54,6 +54,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -93,6 +94,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -148,6 +150,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: { foo: "banana" },
         commandInfo,
       })
@@ -223,6 +226,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -287,6 +291,7 @@ describe("resolveProjectConfig", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "some-user",
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -316,6 +321,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -350,6 +356,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -403,6 +410,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -479,6 +487,7 @@ describe("resolveProjectConfig", () => {
         artifactsPath: "/tmp",
         branch: "main",
         username: "some-user",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -550,6 +559,7 @@ describe("pickEnvironment", () => {
           artifactsPath,
           branch: "main",
           username,
+          loggedIn: true,
           secrets: {},
           commandInfo,
         }),
@@ -577,6 +587,7 @@ describe("pickEnvironment", () => {
         artifactsPath,
         branch: "main",
         username,
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -621,6 +632,7 @@ describe("pickEnvironment", () => {
         artifactsPath,
         branch: "main",
         username,
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -664,6 +676,7 @@ describe("pickEnvironment", () => {
         artifactsPath,
         branch: "main",
         username,
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -722,6 +735,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -776,6 +790,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -824,6 +839,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -873,6 +889,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -922,6 +939,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -982,6 +1000,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -1043,6 +1062,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -1076,6 +1096,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: { foo: "banana" },
       commandInfo,
     })
@@ -1108,6 +1129,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -1139,6 +1161,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -1165,6 +1188,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -1225,6 +1249,7 @@ describe("pickEnvironment", () => {
       artifactsPath,
       branch: "main",
       username,
+      loggedIn: true,
       secrets: {},
       commandInfo,
     })
@@ -1267,6 +1292,7 @@ describe("pickEnvironment", () => {
           artifactsPath,
           branch: "main",
           username,
+          loggedIn: true,
           secrets: {},
           commandInfo,
         }),
@@ -1305,6 +1331,7 @@ describe("pickEnvironment", () => {
           artifactsPath,
           branch: "main",
           username,
+          loggedIn: true,
           secrets: {},
           commandInfo,
         }),
@@ -1340,6 +1367,7 @@ describe("pickEnvironment", () => {
           artifactsPath,
           branch: "main",
           username,
+          loggedIn: true,
           secrets: {},
           commandInfo,
         }),
@@ -1367,6 +1395,7 @@ describe("pickEnvironment", () => {
         artifactsPath,
         branch: "main",
         username,
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -1399,6 +1428,7 @@ describe("pickEnvironment", () => {
         artifactsPath,
         branch: "main",
         username,
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -1431,6 +1461,7 @@ describe("pickEnvironment", () => {
         artifactsPath,
         username,
         branch: "main",
+        loggedIn: true,
         secrets: {},
         commandInfo,
       })
@@ -1464,6 +1495,7 @@ describe("pickEnvironment", () => {
           artifactsPath,
           branch: "main",
           username,
+          loggedIn: true,
           secrets: {},
           commandInfo,
         }),
@@ -1495,6 +1527,7 @@ describe("pickEnvironment", () => {
           artifactsPath,
           branch: "main",
           username,
+          loggedIn: true,
           secrets: {},
           commandInfo,
         }),

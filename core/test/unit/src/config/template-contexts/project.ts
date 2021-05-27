@@ -27,6 +27,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "some-user",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -43,6 +44,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "some-user",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -51,18 +53,74 @@ describe("ProjectConfigContext", () => {
     })
   })
 
-  it("should resolve secrets", () => {
+  it("should resolve when logged in", () => {
     const c = new ProjectConfigContext({
       projectName: "some-project",
       projectRoot: "/tmp",
       artifactsPath: "/tmp",
       branch: "main",
       username: "some-user",
+      loggedIn: true,
       secrets: { foo: "banana" },
       commandInfo: { name: "test", args: {}, opts: {} },
     })
     expect(c.resolve({ key: ["secrets", "foo"], nodePath: [], opts: {} })).to.eql({
       resolved: "banana",
+    })
+  })
+
+  context("errors thrown when a missing secret is referenced", () => {
+    it("should ask the user to log in if they're logged out", () => {
+      const c = new ProjectConfigContext({
+        projectName: "some-project",
+        projectRoot: "/tmp",
+        artifactsPath: "/tmp",
+        branch: "main",
+        username: "some-user",
+        loggedIn: false, // <-----
+        secrets: { foo: "banana" },
+        commandInfo: { name: "test", args: {}, opts: {} },
+      })
+
+      const { message } = c.resolve({ key: ["secrets", "bar"], nodePath: [], opts: {} })
+
+      expect(stripAnsi(message!)).to.match(/Please log in via the garden login command to use Garden with secrets/)
+    })
+
+    context("when logged in", () => {
+      it("should notify the user if an empty set of secrets was returned by the backend", () => {
+        const c = new ProjectConfigContext({
+          projectName: "some-project",
+          projectRoot: "/tmp",
+          artifactsPath: "/tmp",
+          branch: "main",
+          username: "some-user",
+          loggedIn: true,
+          secrets: {}, // <-----
+          commandInfo: { name: "test", args: {}, opts: {} },
+        })
+
+        const { message } = c.resolve({ key: ["secrets", "bar"], nodePath: [], opts: {} })
+
+        expect(stripAnsi(message!)).to.match(/An empty set of secrets was fetched/)
+      })
+
+      it("if a non-empty set of secrets was returned by the backend, provide a helpful suggestion", () => {
+        const c = new ProjectConfigContext({
+          projectName: "some-project",
+          projectRoot: "/tmp",
+          artifactsPath: "/tmp",
+          branch: "main",
+          username: "some-user",
+          loggedIn: true,
+          secrets: { foo: "banana " }, // <-----
+          commandInfo: { name: "test", args: {}, opts: {} },
+        })
+
+        const { message } = c.resolve({ key: ["secrets", "bar"], nodePath: [], opts: {} })
+
+        expect(stripAnsi(message!)).to.match(/Please make sure that all required secrets have been created/)
+      })
     })
   })
 
@@ -73,6 +131,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "some-user",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -92,6 +151,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "some-user",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -107,6 +167,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "SomeUser",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -125,6 +186,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "SomeUser",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -140,6 +202,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "SomeUser",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "deploy", args: {}, opts: { "hot-reload": ["my-service"] } },
     })
@@ -158,6 +221,7 @@ describe("ProjectConfigContext", () => {
       artifactsPath: "/tmp",
       branch: "main",
       username: "SomeUser",
+      loggedIn: true,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })

@@ -403,6 +403,7 @@ export function resolveProjectConfig({
   artifactsPath,
   branch,
   username,
+  loggedIn,
   secrets,
   commandInfo,
 }: {
@@ -411,6 +412,7 @@ export function resolveProjectConfig({
   artifactsPath: string
   branch: string
   username: string
+  loggedIn: boolean
   secrets: PrimitiveMap
   commandInfo: CommandInfo
 }): ProjectConfig {
@@ -431,6 +433,7 @@ export function resolveProjectConfig({
       artifactsPath,
       branch,
       username,
+      loggedIn,
       secrets,
       commandInfo,
     })
@@ -511,6 +514,7 @@ export async function pickEnvironment({
   artifactsPath,
   branch,
   username,
+  loggedIn,
   secrets,
   commandInfo,
 }: {
@@ -519,6 +523,7 @@ export async function pickEnvironment({
   artifactsPath: string
   branch: string
   username: string
+  loggedIn: boolean
   secrets: PrimitiveMap
   commandInfo: CommandInfo
 }) {
@@ -552,6 +557,7 @@ export async function pickEnvironment({
       branch,
       username,
       variables: projectVariables,
+      loggedIn,
       secrets,
       commandInfo,
     })

@@ -6,10 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+import { last, size } from "lodash"
+import chalk from "chalk"
 import { PrimitiveMap, joiIdentifierMap, joiStringMap, joiPrimitive, DeepPrimitiveMap, joiVariables } from "../common"
 import { joi } from "../common"
 import { deline, dedent } from "../../util/string"
-import { schema, ConfigContext } from "./base"
+import { schema, ConfigContext, ContextKeySegment } from "./base"
 import { CommandInfo } from "../../plugin-context"
 
 class LocalContext extends ConfigContext {
@@ -200,6 +202,7 @@ export class DefaultEnvironmentContext extends ConfigContext {
 }
 
 export interface ProjectConfigContextParams extends DefaultEnvironmentContextParams {
+  loggedIn: boolean
   secrets: PrimitiveMap
 }
 
@@ -220,9 +223,37 @@ export class ProjectConfigContext extends DefaultEnvironmentContext {
       })
   )
   public secrets: PrimitiveMap
+  private _loggedIn: boolean
+
+  getMissingKeyErrorFooter(_key: ContextKeySegment, path: ContextKeySegment[]): string {
+    if (last(path) !== "secrets") {
+      return ""
+    }
+
+    if (!this._loggedIn) {
+      return dedent`
+        You are not logged in to Garden Enterprise, but one or more secrets are referenced in template strings in your Garden configuration files.
+
+        Please log in via the ${chalk.green("garden login")} command to use Garden with secrets.
+      `
+    }
+
+    if (size(this.secrets) === 0) {
+      return deline`
+        Note: An empty set of secrets was fetched. If you have defined secrets for the current project and environment in Garden
+        Enterprise, this may indicate a problem with your configuration.
+      `
+    } else {
+      return deline`
+        Please make sure that all required secrets have been created for this project, and are accessible in this
+        environment.
+      `
+    }
+  }
 
   constructor(params: ProjectConfigContextParams) {
     super(params)
+    this._loggedIn = params.loggedIn
     this.secrets = params.secrets
   }
 }
