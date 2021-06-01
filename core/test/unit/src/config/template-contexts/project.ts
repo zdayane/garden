@@ -11,6 +11,7 @@ import stripAnsi = require("strip-ansi")
 import { ConfigContext } from "../../../../../src/config/template-contexts/base"
 import { ProjectConfigContext } from "../../../../../src/config/template-contexts/project"
 import { resolveTemplateString } from "../../../../../src/template-string/template-string"
+import { deline } from "../../../../../src/util/string"
 
 type TestValue = string | ConfigContext | TestValues | TestValueFunction
 type TestValueFunction = () => TestValue | Promise<TestValue>
@@ -19,6 +20,8 @@ interface TestValues {
 }
 
 describe("ProjectConfigContext", () => {
+  const enterpriseDomain = "https://garden.mydomain.com"
+
   it("should resolve local env variables", () => {
     process.env.TEST_VARIABLE = "value"
     const c = new ProjectConfigContext({
@@ -28,6 +31,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "some-user",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -45,6 +49,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "some-user",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -61,6 +66,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "some-user",
       loggedIn: true,
+      enterpriseDomain,
       secrets: { foo: "banana" },
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -78,6 +84,7 @@ describe("ProjectConfigContext", () => {
         branch: "main",
         username: "some-user",
         loggedIn: false, // <-----
+        enterpriseDomain,
         secrets: { foo: "banana" },
         commandInfo: { name: "test", args: {}, opts: {} },
       })
@@ -96,13 +103,18 @@ describe("ProjectConfigContext", () => {
           branch: "main",
           username: "some-user",
           loggedIn: true,
+          enterpriseDomain,
           secrets: {}, // <-----
           commandInfo: { name: "test", args: {}, opts: {} },
         })
 
         const { message } = c.resolve({ key: ["secrets", "bar"], nodePath: [], opts: {} })
 
-        expect(stripAnsi(message!)).to.match(/An empty set of secrets was fetched/)
+        const errMsg = deline`
+          Looks like no secrets have been created for this project and/or environment in Garden Enterprise.
+          To create secrets, please visit ${enterpriseDomain} and navigate to the secrets section for this project.
+        `
+        expect(stripAnsi(message!)).to.match(new RegExp(errMsg))
       })
 
       it("if a non-empty set of secrets was returned by the backend, provide a helpful suggestion", () => {
@@ -113,13 +125,18 @@ describe("ProjectConfigContext", () => {
           branch: "main",
           username: "some-user",
           loggedIn: true,
+          enterpriseDomain,
           secrets: { foo: "banana " }, // <-----
           commandInfo: { name: "test", args: {}, opts: {} },
         })
 
         const { message } = c.resolve({ key: ["secrets", "bar"], nodePath: [], opts: {} })
 
-        expect(stripAnsi(message!)).to.match(/Please make sure that all required secrets have been created/)
+        const errMsg = deline`
+          Please make sure that all required secrets for this project exist in Garden Enterprise, and are accessible in this
+          environment.
+        `
+        expect(stripAnsi(message!)).to.match(new RegExp(errMsg))
       })
     })
   })
@@ -132,6 +149,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "some-user",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -152,6 +170,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "some-user",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -168,6 +187,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "SomeUser",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -187,6 +207,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "SomeUser",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })
@@ -203,6 +224,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "SomeUser",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "deploy", args: {}, opts: { "hot-reload": ["my-service"] } },
     })
@@ -222,6 +244,7 @@ describe("ProjectConfigContext", () => {
       branch: "main",
       username: "SomeUser",
       loggedIn: true,
+      enterpriseDomain,
       secrets: {},
       commandInfo: { name: "test", args: {}, opts: {} },
     })

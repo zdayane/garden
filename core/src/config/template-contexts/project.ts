@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import { last, size } from "lodash"
+import { last, isEmpty } from "lodash"
 import chalk from "chalk"
 import { PrimitiveMap, joiIdentifierMap, joiStringMap, joiPrimitive, DeepPrimitiveMap, joiVariables } from "../common"
 import { joi } from "../common"
@@ -204,6 +204,7 @@ export class DefaultEnvironmentContext extends ConfigContext {
 export interface ProjectConfigContextParams extends DefaultEnvironmentContextParams {
   loggedIn: boolean
   secrets: PrimitiveMap
+  enterpriseDomain: string | undefined
 }
 
 /**
@@ -223,6 +224,7 @@ export class ProjectConfigContext extends DefaultEnvironmentContext {
       })
   )
   public secrets: PrimitiveMap
+  public enterpriseDomain: string | undefined
   private _loggedIn: boolean
 
   getMissingKeyErrorFooter(_key: ContextKeySegment, path: ContextKeySegment[]): string {
@@ -238,14 +240,18 @@ export class ProjectConfigContext extends DefaultEnvironmentContext {
       `
     }
 
-    if (size(this.secrets) === 0) {
+    if (isEmpty(this.secrets)) {
+      // TODO: Provide project ID (not UID) to this class so we can render a full link to the secrets section of the
+      // project. To do this, we'll also need to handle the case where the project doesn't already exist in GE/CLoud.
+      const suffix = this.enterpriseDomain
+        ? ` To create secrets, please visit ${this.enterpriseDomain} and navigate to the secrets section for this project.`
+        : ""
       return deline`
-        Note: An empty set of secrets was fetched. If you have defined secrets for the current project and environment in Garden
-        Enterprise, this may indicate a problem with your configuration.
+        Looks like no secrets have been created for this project and/or environment in Garden Enterprise.${suffix}
       `
     } else {
       return deline`
-        Please make sure that all required secrets have been created for this project, and are accessible in this
+        Please make sure that all required secrets for this project exist in Garden Enterprise, and are accessible in this
         environment.
       `
     }
@@ -255,6 +261,7 @@ export class ProjectConfigContext extends DefaultEnvironmentContext {
     super(params)
     this._loggedIn = params.loggedIn
     this.secrets = params.secrets
+    this.enterpriseDomain = params.enterpriseDomain
   }
 }
 

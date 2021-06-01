@@ -1212,6 +1212,7 @@ export async function resolveGardenParams(currentDirectory: string, opts: Garden
   }
 
   const loggedIn = !!enterpriseApi
+  const enterpriseDomain = enterpriseApi?.domain
 
   config = resolveProjectConfig({
     defaultEnvironment: defaultEnvironmentName,
@@ -1220,6 +1221,7 @@ export async function resolveGardenParams(currentDirectory: string, opts: Garden
     branch: vcsBranch,
     username: _username,
     loggedIn,
+    enterpriseDomain,
     secrets,
     commandInfo,
   })
@@ -1233,6 +1235,7 @@ export async function resolveGardenParams(currentDirectory: string, opts: Garden
     branch: vcsBranch,
     username: _username,
     loggedIn,
+    enterpriseDomain,
     secrets,
     commandInfo,
   })

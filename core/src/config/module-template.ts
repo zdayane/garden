@@ -56,7 +56,8 @@ export async function resolveModuleTemplate(
   }
   const branch = garden.vcsBranch
   const loggedIn = !!garden.enterpriseApi
-  const context = new ProjectConfigContext({ ...garden, branch, loggedIn })
+  const enterpriseDomain = garden.enterpriseApi?.domain
+  const context = new ProjectConfigContext({ ...garden, branch, loggedIn, enterpriseDomain })
   const resolved = resolveTemplateStrings(partial, context)
 
   // Validate the partial config
@@ -116,7 +117,8 @@ export async function resolveTemplatedModule(
   // immediately.
   const branch = garden.vcsBranch
   const loggedIn = !!garden.enterpriseApi
-  const templateContext = new EnvironmentConfigContext({ ...garden, branch, loggedIn })
+  const enterpriseDomain = garden.enterpriseApi?.domain
+  const templateContext = new EnvironmentConfigContext({ ...garden, branch, loggedIn, enterpriseDomain })
   const resolvedWithoutInputs = resolveTemplateStrings(
     { ...config, spec: omit(config.spec, "inputs") },
     templateContext
@@ -165,6 +167,7 @@ export async function resolveTemplatedModule(
     ...garden,
     branch: garden.vcsBranch,
     loggedIn: !!garden.enterpriseApi,
+    enterpriseDomain,
     parentName: resolved.name,
     templateName: template.name,
     inputs: partiallyResolvedInputs,

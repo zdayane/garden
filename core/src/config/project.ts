@@ -404,6 +404,7 @@ export function resolveProjectConfig({
   branch,
   username,
   loggedIn,
+  enterpriseDomain,
   secrets,
   commandInfo,
 }: {
@@ -413,6 +414,7 @@ export function resolveProjectConfig({
   branch: string
   username: string
   loggedIn: boolean
+  enterpriseDomain: string | undefined
   secrets: PrimitiveMap
   commandInfo: CommandInfo
 }): ProjectConfig {
@@ -434,6 +436,7 @@ export function resolveProjectConfig({
       branch,
       username,
       loggedIn,
+      enterpriseDomain,
       secrets,
       commandInfo,
     })
@@ -515,6 +518,7 @@ export async function pickEnvironment({
   branch,
   username,
   loggedIn,
+  enterpriseDomain,
   secrets,
   commandInfo,
 }: {
@@ -524,6 +528,7 @@ export async function pickEnvironment({
   branch: string
   username: string
   loggedIn: boolean
+  enterpriseDomain: string | undefined
   secrets: PrimitiveMap
   commandInfo: CommandInfo
 }) {
@@ -558,6 +563,7 @@ export async function pickEnvironment({
       username,
       variables: projectVariables,
       loggedIn,
+      enterpriseDomain,
       secrets,
       commandInfo,
     })
